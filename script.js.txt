@@ -1,0 +1,31 @@
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+    const tutorList = document.getElementById('tutor-list');
+    const registerForm = document.getElementById('register-form');
+    let tutors = [];
+
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const subject = document.getElementById('subject').value;
+        const experience = document.getElementById('experience').value;
+        const phone = document.getElementById('phone').value;
+
+        tutors.push({ name, subject, experience, phone });
+        displayTutors();
+        registerForm.reset();
+    });
+
+    function displayTutors() {
+        tutorList.innerHTML = '';
+        tutors.forEach(tutor => {
+            const div = document.createElement('div');
+            div.classList.add('tutor-card');
+            div.innerHTML = `<h3>${tutor.name}</h3>
+                             <p><strong>Subject:</strong> ${tutor.subject}</p>
+                             <p><strong>Experience:</strong> ${tutor.experience}</p>
+                             <p><strong>Phone:</strong> ${tutor.phone}</p>`;
+            tutorList.appendChild(div);
+        });
+    }
+});
